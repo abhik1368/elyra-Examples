@@ -1,0 +1,149 @@
+{
+  "doc_type": "pipeline",
+  "version": "3.0",
+  "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json",
+  "id": "elyra-auto-generated-pipeline",
+  "primary_pipeline": "primary",
+  "pipelines": [
+    {
+      "id": "primary",
+      "nodes": [
+        {
+          "id": "3449dab5-d9f3-4c8f-a654-39bb83c78d36",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "filename": "process_data.ipynb",
+              "outputs": [],
+              "env_vars": [
+                "PATH="
+              ],
+              "kubernetes_secrets": [],
+              "kubernetes_tolerations": [],
+              "kubernetes_pod_annotations": [],
+              "dependencies": [],
+              "include_subdirectories": false,
+              "mounted_volumes": [],
+              "runtime_image": "amancevice/pandas:1.4.1"
+            },
+            "label": "Load data",
+            "ui_data": {
+              "label": "Load data",
+              "image": "/static/elyra/notebook.svg",
+              "x_pos": 113,
+              "y_pos": 228,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              }
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "46ebf090-3965-405b-975d-ca806850a4dc",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "filename": "dataml.ipynb",
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_secrets": [],
+              "kubernetes_tolerations": [],
+              "kubernetes_pod_annotations": [],
+              "dependencies": [],
+              "include_subdirectories": false,
+              "mounted_volumes": [],
+              "runtime_image": "amancevice/pandas:1.4.1"
+            },
+            "label": "ML work",
+            "ui_data": {
+              "label": "ML work",
+              "image": "/static/elyra/notebook.svg",
+              "x_pos": 365,
+              "y_pos": 229,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "6e31e639-113a-4bde-9a31-c8df8e89e576",
+                  "node_id_ref": "3449dab5-d9f3-4c8f-a654-39bb83c78d36",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "app_data": {
+        "ui_data": {
+          "comments": []
+        },
+        "version": 7,
+        "properties": {
+          "pipeline_defaults": {
+            "runtime_image": "amancevice/pandas:1.4.1"
+          },
+          "name": "ml_rdkit",
+          "runtime": "Generic",
+          "description": "Process"
+        }
+      },
+      "runtime_ref": ""
+    }
+  ],
+  "schemas": []
+}
